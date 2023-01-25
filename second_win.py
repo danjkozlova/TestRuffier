@@ -9,14 +9,14 @@ from PyQt5.QtWidgets import (
 from instr import *
 from final_win import *
 
-class Person():
+'''class Person():
     def __init__(self, name, age):
         self.name = name
-        self.age = age
+        self.age = age'''
 
 class Experiment():
-    def __init__(self, person, test1, test2, test3):
-        self.person = person
+    def __init__(self, age, test1, test2, test3):
+        self.age = age
         self.test1 = test1
         self.test2 = test2
         self.test3 = test3
@@ -25,16 +25,12 @@ class TestWin(QWidget):
     def __init__(self):
         ''' окно, в котором проводится опрос '''
         super().__init__()
-
         # создаём и настраиваем графические эелементы:
         self.initUI()
-
         #устанавливает связи между элементами
         self.connects()
-
         #устанавливает, как будет выглядеть окно (надпись, размер, место)
         self.set_appear()
-        
         # старт:
         self.show()
     
@@ -57,7 +53,6 @@ class TestWin(QWidget):
         self.btn_test1 = QPushButton(txt_starttest1, self)
         self.btn_test2 = QPushButton(txt_starttest2, self)
         self.btn_test3 = QPushButton(txt_starttest3, self)
-
 
         self.text_name = QLabel(txt_name)
         self.text_age = QLabel(txt_age)
@@ -113,8 +108,7 @@ class TestWin(QWidget):
     
     def next_click(self):
         self.hide()
-        self.prs = Person(self.line_name.text, int(self.line_age.text()))
-        self.exp = Experiment(self.prs, self.line_test1.text(), self.line_test2.text(), self.line_test2.text())
+        self.exp = Experiment(int(self.line_age.text()), self.line_test1.text(), self.line_test2.text(), self.line_test2.text())
         self.fw = FinalWin(self.exp)
 
     def timer_test1(self):
